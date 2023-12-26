@@ -15,17 +15,27 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: BlocBuilder<InternetBloc, InternetState>(
-            builder: (context, state) {
-              if (state is InternetGainedState) {
-                return Text("Connected");
-              } else if (state is InternetLostState) {
-                return Text("Not connected");
-              } else {
-                return Text("loading...");
-              }
-            },
-          ),
+          child: BlocConsumer<InternetBloc , InternetState>(builder: (context, state) {
+            if (state is InternetGainedState) {
+              return Text("connected");
+            } else if (state is InternetLostState) {
+              return Text("Not connected");
+            } else {
+              return Text("loading...");
+            }
+          }, listener: (context, state) {
+            if (state is InternetGainedState) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("Internet is connected"),
+                backgroundColor: Colors.teal,
+              ));
+            } else if (state is InternetLostState) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text("Not connected"),
+                backgroundColor: Colors.red,
+              ));
+            }
+          }),
         ),
       ),
     );
