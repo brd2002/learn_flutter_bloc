@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_flutter_bloc/Home_page.dart';
 import 'package:learn_flutter_bloc/internet/bloc/internet_bloc.dart';
+import 'package:learn_flutter_bloc/internet1/cubit/internet1_cubit.dart';
 import 'package:learn_flutter_bloc/routes.dart';
 import 'package:bloc/bloc.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => InternetBloc(),
+      create: (context) => Internet1Cubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
